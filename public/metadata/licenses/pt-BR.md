@@ -1,0 +1,1 @@
+### Termos e Condições de Uso da piercecommercepartnerar customShippingSimulator

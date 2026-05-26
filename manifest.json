@@ -1,0 +1,32 @@
+{
+  "vendor": "piercecommercepartnerar",
+  "name": "custom-shipping-simulator",
+  "version": "0.0.0",
+  "title": "Custom Shipping Simulator",
+  "description": "App to show a custom component in pdp to calculate shipping ",
+  "defaultLocale": "es-AR",
+  "billingOptions": {
+    "free": true,
+    "termsURL": "",
+    "support": {
+      "url": "",
+      "email": "",
+      "phone": ""
+    },
+    "availableCountries": [
+      "*"
+    ]
+  },
+  "builders": {
+    "node": "6.x",
+    "store": "0.x",
+    "react": "3.x",
+    "messages": "1.x",
+    "docs": "0.x"
+  },
+  "dependencies": {
+    "vtex.css-handles": "0.x",
+    "vtex.styleguide": "9.x"
+  },
+  "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
+}
