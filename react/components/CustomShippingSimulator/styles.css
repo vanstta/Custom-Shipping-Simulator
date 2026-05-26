@@ -1,0 +1,154 @@
+.shippingSimulatorTrigger {
+    background: transparent;
+    border: none;
+    color: #65b7e6;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 1rem 0;
+}
+
+.shippingSimulatorOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shippingSimulatorModal {
+    background: #fff;
+    width: 100%;
+    max-width: 640px;
+    border-radius: 4px;
+    border-radius: 8px;
+    position: relative;
+    padding-bottom: 30px;
+}
+
+.shippingSimulatorHeader {
+ display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #279d2e;
+    border-radius: 8px 8px 0 0;
+    padding: 1rem 2rem;
+}
+.shippingSimulatorClose {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.25rem;    
+    padding: 0;
+    cursor: pointer;
+}
+.shippingSimulatorTitle {
+    margin: 0;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 600;
+}
+.shippingSimulatorForm {
+    gap: 10px;
+    display: flex;
+    padding: 0 2rem;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+.shippingSimulatorLabel {
+    font-weight: 700;
+}
+.shippingSimulatorInputWrapper {
+  position: relative;
+}
+
+.shippingSimulatorInput {
+  width: 100%;
+  outline: none;
+      width: 100%;
+    padding: 12px 20px;
+    border: 1px solid #279d2e;
+    font-size: 14px;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+.shippingSimulatorSubmit {
+
+
+    color: #279d2e;
+    border: none;
+    padding: 0 1rem;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 14px;
+    text-transform: uppercase;
+    background-color: transparent;
+}
+.shippingSimulatorUnknownPostalCode {
+    color: #000;
+    font-size: .75rem;
+    text-decoration: none;
+}
+.shippingSimulatorTable {
+   width: 100%;
+
+}
+.shippingSimulatorTable thead tr th {
+    font-size: .75rem;
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: 400;
+  
+}
+.shippingSimulatorTable thead {
+    margin-bottom: 1rem;
+}
+.shippingSimulatorResultType{
+    font-size: 12px;
+    font-weight: 700;
+}
+.shippingSimulatorResultTime, .shippingSimulatorResultPrice {
+    font-size: 12px;
+    font-weight: 400;
+}
+.shippingSimulatorContent {
+    padding: 0 32px;
+}
+.shippingSimulatorGroupTitle {
+    font-size: .75rem;
+    color: #279d2e;
+    font-weight: 700;
+    position: relative;
+  
+}
+.shippingSimulatorGroupTitleDelivery {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  /* padding: 1rem 0; */
+}
+.shippingSimulatorGroupTitleDelivery::after {
+  content: "";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDY0MCA2NDAiPjxwYXRoIGQ9Ik0wIDBoNjQwdjY0MEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGZpbGw9IiMyZTdkMzIiIGQ9Ik02NCAxNjBjMC0zNS4zIDI4LjctNjQgNjQtNjRoMjg4YzM1LjMgMCA2NCAyOC43IDY0IDY0djMyaDUwLjdjMTcgMCAzMy4zIDYuNyA0NS4zIDE4LjdsNDUuMyA0NS4zYzEyIDEyIDE4LjcgMjguMyAxOC43IDQ1LjNWNDQ4YzAgMzUuMy0yOC43IDY0LTY0IDY0aC0zLjNjLTEwLjQgMzYuOS00NC40IDY0LTg0LjcgNjRzLTc0LjItMjcuMS04NC43LTY0SDMwMC43Yy0xMC40IDM2LjktNDQuNCA2NC04NC43IDY0cy03NC4yLTI3LjEtODQuNy02NEgxMjhjLTM1LjMgMC02NC0yOC43LTY0LTY0di00OEgyNGMtMTMuMyAwLTI0LTEwLjctMjQtMjRzMTAuNy0yNCAyNC0yNGgxMTJjMTMuMyAwIDI0LTEwLjcgMjQtMjRzLTEwLjctMjQtMjQtMjRIMjRjLTEzLjMgMC0yNC0xMC43LTI0LTI0czEwLjctMjQgMjQtMjRoMTc2YzEzLjMgMCAyNC0xMC43IDI0LTI0cy0xMC43LTI0LTI0LTI0SDI0Yy0xMy4zIDAtMjQtMTAuNy0yNC0yNHMxMC43LTI0IDI0LTI0em01MTIgMTkydi01MC43TDUzMC43IDI1Nkg0ODB2OTZ6TTI1NiA0ODhjMC0yMi4xLTE3LjktNDAtNDAtNDBzLTQwIDE3LjktNDAgNDAgMTcuOSA0MCA0MCA0MCA0MC0xNy45IDQwLTQwbTIzMiA0MGMyMi4xIDAgNDAtMTcuOSA0MC00MHMtMTcuOS00MC00MC00MC00MCAxNy45LTQwIDQwIDE3LjkgNDAgNDAgNDAiLz48L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin-right: 12px;
+
+}
+
+.shippingSimulatorTable td {
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
