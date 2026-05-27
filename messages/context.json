@@ -1,7 +1,19 @@
 {
-  "store/loading" : "Loading...",
-  "store/greeting" : "Hello",
-  "store/confirm" : "Confirm",
-  "store/cancel": "Cancel",
-  "store/goBack" : "Go Back"
+  "store/shipping.trigger":"Calculate shipping cost",
+  "store/shipping.modal.title":"Calculate shipping cost",
+  "store/shipping.input.label":"Enter postal code",
+  "store/shipping.input.placeholder":"Postal Code",
+  "store/shipping.submit.loading":"Calculating...",
+  "store/shipping.submit.default":"Calculate shipping",
+  "store/shipping.help.postalCode":"I don't know my postal code",
+  "store/shipping.error.default":"Error calculating shipping",
+  "store/shipping.table.type":"Shipping type",
+  "store/shipping.table.time":"Estimated time",
+  "store/shipping.table.price":"Price",
+  "store/shipping.group.delivery":"Home delivery",
+  "store/shipping.group.pickup":"Pickup point",
+  "store/shipping.free":"Free",
+  "store/shipping.sameDay":"Same day delivery available",
+  "store/shipping.nextDay":"Delivery available tomorrow",
+  "store/shipping.untilDays":"Up to {days} business days"
 }

@@ -1,7 +1,19 @@
 {
-  "store/loading": "Cargando...",
-  "store/greeting": "¡Hola",
-  "store/confirm": "Confirmar",
-  "store/cancel": "Cancelar",
-  "store/goBack": "Atrás"
+  "store/shipping.trigger":"Calcular costo de envío",
+  "store/shipping.modal.title":"Calcular el costo de envío",
+  "store/shipping.input.label":"Ingresa el código postal",
+  "store/shipping.input.placeholder":"Código Postal",
+  "store/shipping.submit.loading":"Calculando...",
+  "store/shipping.submit.default":"Calcular envío",
+  "store/shipping.help.postalCode":"No sé mi código postal",
+  "store/shipping.error.default":"Error al calcular el envío",
+  "store/shipping.table.type":"Tipo de envío",
+  "store/shipping.table.time":"Tiempo estimado",
+  "store/shipping.table.price":"Costo",
+  "store/shipping.group.delivery":"Envío a domicilio",
+  "store/shipping.group.pickup":"Punto de retiro",
+  "store/shipping.free":"Gratis",
+  "store/shipping.sameDay":"Disponible para entrega en el día",
+  "store/shipping.nextDay":"Disponible para entrega mañana",
+  "store/shipping.untilDays":"Hasta {days} días hábiles"
 }

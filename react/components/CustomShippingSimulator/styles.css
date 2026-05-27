@@ -2,9 +2,9 @@
     background: transparent;
     border: none;
     color: #65b7e6;
-    font-size: 20px;
+    font-size: 1.25rem;
     cursor: pointer;
-    padding: 1rem 0;
+    padding: 16px 0;
 }
 
 .shippingSimulatorOverlay {
@@ -21,42 +21,52 @@
 .shippingSimulatorModal {
     background: #fff;
     width: 100%;
-    max-width: 640px;
-    border-radius: 4px;
-    border-radius: 8px;
+    max-width: 40rem;
+    border-radius: .25rem;
+    border-radius: .5rem;
     position: relative;
-    padding-bottom: 30px;
+    padding-bottom: 1.875rem;
 }
-
+@media screen and (max-width: 48rem) {
+    .shippingSimulatorModal {
+       max-height: 80vh;
+         overflow-y: auto;
+    }
+}
 .shippingSimulatorHeader {
  display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     background-color: #279d2e;
-    border-radius: 8px 8px 0 0;
-    padding: 1rem 2rem;
+    border-radius: .5rem .5rem 0 0;
+    padding: 16px 32px;
 }
 .shippingSimulatorClose {
     background: transparent;
     border: none;
     color: #ffffff;
-    font-size: 1.25rem;    
+    font-size: 20px;    
     padding: 0;
     cursor: pointer;
 }
 .shippingSimulatorTitle {
     margin: 0;
-    font-size: 18px;
+    font-size: 1.125rem;
     color: #fff;
     font-weight: 600;
 }
 .shippingSimulatorForm {
-    gap: 10px;
+    gap: .625rem;
     display: flex;
-    padding: 0 2rem;
+    padding: 0 32px;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
+}
+@media screen and (max-width: 48rem) {
+    .shippingSimulatorForm {
+        padding: 0;
+    }
 }
 .shippingSimulatorLabel {
     font-weight: 700;
@@ -69,10 +79,10 @@
   width: 100%;
   outline: none;
       width: 100%;
-    padding: 12px 20px;
-    border: 1px solid #279d2e;
-    font-size: 14px;
-    border-radius: 20px;
+    padding: .75rem 1.25rem;
+    border: .0625rem solid #279d2e;
+    font-size: .875rem;
+    border-radius: 1.25rem;
     box-sizing: border-box;
 }
 
@@ -81,74 +91,128 @@
 
     color: #279d2e;
     border: none;
-    padding: 0 1rem;
-    font-size: 14px;
+    padding: 0 16px;
+    font-size: .875rem;
     font-weight: 400;
     cursor: pointer;
     position: absolute;
-    right: 10px;
-    top: 14px;
+    right: .625rem;
+    top: .8125rem;
     text-transform: uppercase;
     background-color: transparent;
+    
+}
+@media screen and (max-width: 48rem) {
+    .shippingSimulatorSubmit {
+   font-size: .75rem;
+       top: 1rem;
+    }
 }
 .shippingSimulatorUnknownPostalCode {
     color: #000;
-    font-size: .75rem;
+    font-size: 12px;
     text-decoration: none;
 }
 .shippingSimulatorTable {
-   width: 100%;
-
+   border-collapse: collapse;
+  width: 100%;
 }
 .shippingSimulatorTable thead tr th {
-    font-size: .75rem;
+    font-size: 12px;
     text-align: left;
     text-transform: uppercase;
     font-weight: 400;
   
 }
 .shippingSimulatorTable thead {
-    margin-bottom: 1rem;
+    margin-bottom: 16px;
 }
 .shippingSimulatorResultType{
-    font-size: 12px;
+    font-size: .75rem;
     font-weight: 700;
 }
 .shippingSimulatorResultTime, .shippingSimulatorResultPrice {
-    font-size: 12px;
+    font-size: .75rem;
     font-weight: 400;
 }
 .shippingSimulatorContent {
-    padding: 0 32px;
+    padding: 0 2rem;
 }
 .shippingSimulatorGroupTitle {
-    font-size: .75rem;
+    font-size: 12px;
     color: #279d2e;
     font-weight: 700;
     position: relative;
-  
+  border-bottom: none !important;
+  padding-top: 1.875rem;
 }
 .shippingSimulatorGroupTitleDelivery {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  /* padding: 1rem 0; */
+
 }
 .shippingSimulatorGroupTitleDelivery::after {
   content: "";
   display: inline-block;
-  width: 1rem;
-  height: 1rem;
+  width: 16px;
+  height: 16px;
   background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDY0MCA2NDAiPjxwYXRoIGQ9Ik0wIDBoNjQwdjY0MEgweiIgZmlsbD0ibm9uZSIvPjxwYXRoIGZpbGw9IiMyZTdkMzIiIGQ9Ik02NCAxNjBjMC0zNS4zIDI4LjctNjQgNjQtNjRoMjg4YzM1LjMgMCA2NCAyOC43IDY0IDY0djMyaDUwLjdjMTcgMCAzMy4zIDYuNyA0NS4zIDE4LjdsNDUuMyA0NS4zYzEyIDEyIDE4LjcgMjguMyAxOC43IDQ1LjNWNDQ4YzAgMzUuMy0yOC43IDY0LTY0IDY0aC0zLjNjLTEwLjQgMzYuOS00NC40IDY0LTg0LjcgNjRzLTc0LjItMjcuMS04NC43LTY0SDMwMC43Yy0xMC40IDM2LjktNDQuNCA2NC04NC43IDY0cy03NC4yLTI3LjEtODQuNy02NEgxMjhjLTM1LjMgMC02NC0yOC43LTY0LTY0di00OEgyNGMtMTMuMyAwLTI0LTEwLjctMjQtMjRzMTAuNy0yNCAyNC0yNGgxMTJjMTMuMyAwIDI0LTEwLjcgMjQtMjRzLTEwLjctMjQtMjQtMjRIMjRjLTEzLjMgMC0yNC0xMC43LTI0LTI0czEwLjctMjQgMjQtMjRoMTc2YzEzLjMgMCAyNC0xMC43IDI0LTI0cy0xMC43LTI0LTI0LTI0SDI0Yy0xMy4zIDAtMjQtMTAuNy0yNC0yNHMxMC43LTI0IDI0LTI0em01MTIgMTkydi01MC43TDUzMC43IDI1Nkg0ODB2OTZ6TTI1NiA0ODhjMC0yMi4xLTE3LjktNDAtNDAtNDBzLTQwIDE3LjktNDAgNDAgMTcuOSA0MCA0MCA0MCA0MC0xNy45IDQwLTQwbTIzMiA0MGMyMi4xIDAgNDAtMTcuOSA0MC00MHMtMTcuOS00MC00MC00MC00MCAxNy45LTQwIDQwIDE3LjkgNDAgNDAgNDAiLz48L3N2Zz4=");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-  margin-right: 12px;
+  margin-right: .75rem;
 
 }
 
 .shippingSimulatorTable td {
-  padding: 1rem 0;
-  border-bottom: 1px solid #eee;
+  padding: 16px 0;
+    border-bottom: .0625rem solid #eee;
 }
 
+.shippingSimulatorTable tbody tr:last-of-type td {
+  border-bottom: none;
+}
+.shippingSimulatorTable {
+  table-layout: fixed;
+}
+
+.shippingSimulatorColumnType {
+  width: 45%;
+}
+
+.shippingSimulatorColumnTime {
+  width: 35%;
+}
+
+.shippingSimulatorColumnPrice {
+  width: 20%;
+}
+
+.shippingSimulatorGroupTitlePickup {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.shippingSimulatorTable th:nth-child(3),
+.shippingSimulatorTable td:nth-child(3) {
+  text-align: right;
+}
+
+.shippingSimulatorTable:nth-child(2){
+  border-top: 1px solid #279d2e;
+}
+
+.shippingSimulatorGroupTitlePickup::after {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M3 8.5V17H7V12.5H13V17H17V8.5' stroke='%23279d2e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2 8.5L4 3H16L18 8.5' stroke='%23279d2e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2 8.5C2 10 3 11 4.5 11C6 11 7 10 7 8.5C7 10 8 11 10 11C12 11 13 10 13 8.5C13 10 14 11 15.5 11C17 11 18 10 18 8.5' stroke='%23279d2e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin-right: .75rem;
+  padding-top: 10px;
+
+}

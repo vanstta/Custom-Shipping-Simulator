@@ -1,105 +1,165 @@
 import React from "react"
+import { useIntl } from "react-intl"
 
 type ShippingResultsProps = {
-    slas: any[]
-    handles: Record<string, string>
+  slas: any[]
+  handles: Record<string, string>
 }
 
-const formatShippingEstimate = (estimate: string) => {
+const ShippingResults: React.FC<ShippingResultsProps> = ({
+  slas,
+  handles,
+}) => {
+  const intl = useIntl()
+
+  const formatShippingEstimate = (estimate: string) => {
     const days = parseInt(estimate, 10)
 
-    if (days === 0) return "Disponible para entrega en el día"
-    if (days === 1) return "Disponible para entrega mañana"
+    if (days === 0) {
+      return intl.formatMessage({
+        id: "store/shipping.sameDay",
+      })
+    }
 
-    return `Hasta ${days} días hábiles`
-}
+    if (days === 1) {
+      return intl.formatMessage({
+        id: "store/shipping.nextDay",
+      })
+    }
 
-const ShippingResults: React.FC<ShippingResultsProps> = ({ slas, handles }) => {
-    const deliverySlas = slas.filter(
-        (sla: any) => sla.deliveryChannel === "delivery"
+    return intl.formatMessage(
+      {
+        id: "store/shipping.untilDays",
+      },
+      {
+        days,
+      }
     )
+  }
 
-    const pickupSlas = slas.filter(
-        (sla: any) => sla.deliveryChannel === "pickup-in-point"
-    )
+  const formatPrice = (price: number) => {
+    if (price === 0) {
+      return intl.formatMessage({
+        id: "store/shipping.free",
+      })
+    }
 
-    return (
-        <div className={handles.shippingSimulatorResults}>
-            <table className={handles.shippingSimulatorTable}>
-                <thead>
-                    <tr>
-                        <th>Tipo de envío</th>
-                        <th>Tiempo estimado</th>
-                        <th>Costo</th>
-                    </tr>
-                </thead>
+    return `$${(price / 100).toLocaleString("es-AR")}`
+  }
 
-                <tbody>
-                    {deliverySlas.length > 0 && (
-                        <>
-                            <tr>
-                                <td
-                                    colSpan={3}
-                                    className={handles.shippingSimulatorGroupTitle}
-                                >
-                                    <div className={handles.shippingSimulatorGroupTitleDelivery}>
-                                        Envío a domicilio
-                                    </div>
-                                </td>
-                            </tr>
+  const renderRows = (items: any[]) => {
+    return items.map((sla: any) => (
+      <tr key={sla.id}>
+        <td className={handles.shippingSimulatorResultType}>
+          {sla.name || sla.id}
+        </td>
 
-                            {deliverySlas.map((sla: any) => (
-                                <tr key={sla.id}>
-                                    <td className={handles.shippingSimulatorResultType}>
-                                        {sla.name || sla.id}
-                                    </td>
+        <td className={handles.shippingSimulatorResultTime}>
+          {formatShippingEstimate(sla.shippingEstimate)}
+        </td>
 
-                                    <td className={handles.shippingSimulatorResultTime}>
-                                        {formatShippingEstimate(sla.shippingEstimate)}
-                                    </td>
+        <td className={handles.shippingSimulatorResultPrice}>
+          {formatPrice(sla.price)}
+        </td>
+      </tr>
+    ))
+  }
 
-                                    <td className={handles.shippingSimulatorResultPrice}>
-                                        ${(sla.price / 100).toLocaleString("es-AR")}
-                                    </td>
-                                </tr>
-                            ))}
-                        </>
-                    )}
+  const deliverySlas = slas.filter(
+    (sla: any) => sla.deliveryChannel === "delivery"
+  )
 
-                    {pickupSlas.length > 0 && (
-                        <>
-                            <tr>
-                                <td
-                                    colSpan={3}
-                                    className={handles.shippingSimulatorGroupTitle}
-                                >
-                                    <div className={handles.shippingSimulatorGroupTitlePickup}>
-                                        Punto de retiro
-                                    </div>
-                                </td>
-                            </tr>
+  const pickupSlas = slas.filter(
+    (sla: any) => sla.deliveryChannel === "pickup-in-point"
+  )
 
-                            {pickupSlas.map((sla: any) => (
-                                <tr key={sla.id}>
-                                    <td className={handles.shippingSimulatorResultType}>
-                                        {sla.name || sla.id}
-                                    </td>
+  return (
+    <div className={handles.shippingSimulatorResults}>
+      {deliverySlas.length > 0 && (
+        <table className={handles.shippingSimulatorTable}>
+          <colgroup>
+            <col className={handles.shippingSimulatorColumnType} />
+            <col className={handles.shippingSimulatorColumnTime} />
+            <col className={handles.shippingSimulatorColumnPrice} />
+          </colgroup>
 
-                                    <td className={handles.shippingSimulatorResultTime}>
-                                        {formatShippingEstimate(sla.shippingEstimate)}
-                                    </td>
+          <thead>
+            <tr>
+              <th>
+                {intl.formatMessage({
+                  id: "store/shipping.table.type",
+                })}
+              </th>
 
-                                    <td className={handles.shippingSimulatorResultPrice}>
-                                        ${(sla.price / 100).toLocaleString("es-AR")}
-                                    </td>
-                                </tr>
-                            ))}
-                        </>
-                    )}
-                </tbody>
-            </table>
-        </div>
-    )
+              <th>
+                {intl.formatMessage({
+                  id: "store/shipping.table.time",
+                })}
+              </th>
+
+              <th>
+                {intl.formatMessage({
+                  id: "store/shipping.table.price",
+                })}
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td
+                colSpan={3}
+                className={handles.shippingSimulatorGroupTitle}
+              >
+                <div
+                  className={
+                    handles.shippingSimulatorGroupTitleDelivery
+                  }
+                >
+                  {intl.formatMessage({
+                    id: "store/shipping.group.delivery",
+                  })}
+                </div>
+              </td>
+            </tr>
+
+            {renderRows(deliverySlas)}
+          </tbody>
+        </table>
+      )}
+
+      {pickupSlas.length > 0 && (
+        <table className={handles.shippingSimulatorTable}>
+          <colgroup>
+            <col className={handles.shippingSimulatorColumnType} />
+            <col className={handles.shippingSimulatorColumnTime} />
+            <col className={handles.shippingSimulatorColumnPrice} />
+          </colgroup>
+
+          <tbody>
+            <tr>
+              <td
+                colSpan={3}
+                className={handles.shippingSimulatorGroupTitle}
+              >
+                <div
+                  className={
+                    handles.shippingSimulatorGroupTitlePickup
+                  }
+                >
+                  {intl.formatMessage({
+                    id: "store/shipping.group.pickup",
+                  })}
+                </div>
+              </td>
+            </tr>
+
+            {renderRows(pickupSlas)}
+          </tbody>
+        </table>
+      )}
+    </div>
+  )
 }
 
 export default ShippingResults

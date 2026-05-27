@@ -1,5 +1,7 @@
 import React, { useState } from "react"
+import { useIntl } from "react-intl"
 import { useCssHandles } from "vtex.css-handles"
+import { useProduct } from "vtex.product-context"
 import "./styles.css"
 
 import { useShippingSimulation } from "../../hooks/useShippingSimulation"
@@ -27,27 +29,47 @@ const CSS_HANDLES = [
   "shippingSimulatorTable",
   "shippingSimulatorGroupTitle",
   "shippingSimulatorGroupTitleDelivery",
-  "shippingSimulatorGroupTitlePickup"
+  "shippingSimulatorGroupTitlePickup",
+  "shippingSimulator",
+  "shippingSimulatorColumnType",
+  "shippingSimulatorColumnTime",
+  "shippingSimulatorColumnPrice",
 ] as const
 
 const CustomShippingSimulator: React.FC = () => {
+  const intl = useIntl()
+
   const handles = useCssHandles(CSS_HANDLES)
+  const productContext = useProduct()
 
   const [isOpen, setIsOpen] = useState(false)
   const [postalCode, setPostalCode] = useState("")
 
-  const { loading, simulation, error, runSimulation } =
+  const { loading, simulation, error, runSimulation, resetSimulation } =
     useShippingSimulation()
+
+  const selectedItem = productContext?.selectedItem
+  const seller = selectedItem?.sellers?.[0]
 
   const slas = simulation?.logisticsInfo?.[0]?.slas || []
 
+  const handleClose = () => {
+    setIsOpen(false)
+    setPostalCode("")
+    resetSimulation()
+  }
+
   const handleSubmit = async () => {
+    if (!selectedItem?.itemId || !seller?.sellerId) {
+      return
+    }
+
     await runSimulation({
       items: [
         {
-          id: "1222222558",
+          id: selectedItem.itemId,
           quantity: 1,
-          seller: "1",
+          seller: seller.sellerId,
         },
       ],
       postalCode,
@@ -62,13 +84,15 @@ const CustomShippingSimulator: React.FC = () => {
         className={handles.shippingSimulatorTrigger}
         onClick={() => setIsOpen(true)}
       >
-        Calcular costo de envío
+        {intl.formatMessage({
+          id: "store/shipping.trigger",
+        })}
       </button>
 
       {isOpen && (
         <div
           className={handles.shippingSimulatorOverlay}
-          onClick={() => setIsOpen(false)}
+          onClick={handleClose}
         >
           <div
             className={handles.shippingSimulatorModal}
@@ -76,13 +100,15 @@ const CustomShippingSimulator: React.FC = () => {
           >
             <div className={handles.shippingSimulatorHeader}>
               <span className={handles.shippingSimulatorTitle}>
-                Calcular el costo de envío
+                {intl.formatMessage({
+                  id: "store/shipping.modal.title",
+                })}
               </span>
 
               <button
                 type="button"
                 className={handles.shippingSimulatorClose}
-                onClick={() => setIsOpen(false)}
+                onClick={handleClose}
               >
                 ×
               </button>
@@ -101,7 +127,9 @@ const CustomShippingSimulator: React.FC = () => {
                     className={handles.shippingSimulatorLabel}
                     htmlFor="postalCode"
                   >
-                    Ingresa el código postal
+                    {intl.formatMessage({
+                      id: "store/shipping.input.label",
+                    })}
                   </label>
 
                   <div className={handles.shippingSimulatorInputWrapper}>
@@ -111,15 +139,27 @@ const CustomShippingSimulator: React.FC = () => {
                       className={handles.shippingSimulatorInput}
                       value={postalCode}
                       onChange={(e) => setPostalCode(e.target.value)}
-                      placeholder="Código Postal"
+                      placeholder={intl.formatMessage({
+                        id: "store/shipping.input.placeholder",
+                      })}
                     />
 
                     <button
                       type="submit"
                       className={handles.shippingSimulatorSubmit}
-                      disabled={loading || !postalCode}
+                      disabled={
+                        loading ||
+                        !postalCode ||
+                        !selectedItem?.itemId
+                      }
                     >
-                      {loading ? "Calculando..." : "Calcular envío"}
+                      {loading
+                        ? intl.formatMessage({
+                            id: "store/shipping.submit.loading",
+                          })
+                        : intl.formatMessage({
+                            id: "store/shipping.submit.default",
+                          })}
                     </button>
                   </div>
 
@@ -127,16 +167,22 @@ const CustomShippingSimulator: React.FC = () => {
                     href="https://www.correoargentino.com.ar/formularios/cpa"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={handles.shippingSimulatorUnknownPostalCode}
+                    className={
+                      handles.shippingSimulatorUnknownPostalCode
+                    }
                   >
-                    No sé mi código postal
+                    {intl.formatMessage({
+                      id: "store/shipping.help.postalCode",
+                    })}
                   </a>
                 </form>
               )}
 
               {error && (
                 <p className={handles.shippingSimulatorError}>
-                  {error}
+                  {intl.formatMessage({
+                    id: "store/shipping.error.default",
+                  })}
                 </p>
               )}
 

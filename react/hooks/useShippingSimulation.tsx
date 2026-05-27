@@ -26,14 +26,22 @@ export function useShippingSimulation() {
       const data = await simulateShipping(body)
 
       setSimulation(data)
+
       return data
     } catch (err) {
-      console.error("vaninasc simulation error", err)
+      console.error("Error error", err)
+
       setError("Error simulating shipping")
+
       return null
     } finally {
       setLoading(false)
     }
+  }
+
+  const resetSimulation = () => {
+    setSimulation(null)
+    setError(null)
   }
 
   return {
@@ -41,5 +49,6 @@ export function useShippingSimulation() {
     simulation,
     error,
     runSimulation,
+    resetSimulation,
   }
 }
