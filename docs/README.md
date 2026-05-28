@@ -1,39 +1,69 @@
-# Custom Shipping Simulator
+# Shipping Simulator
 
-**What does Custom Shipping Simulator do?** 
+Custom VTEX IO app that allows users to simulate shipping options directly from the PDP using their postal code.
 
-Write a brief definition of your app.
+The app retrieves available logistics options for the selected SKU and displays information such as:
 
-<br/>
-
-**Give a brief definition of what blocks you app has**
-Dont forget to add any info future developers may need!
-
-## Configuration
-
-Most apps follow the following steps:
-
-1. Install
-
-2. Declare blocks
-
-3. Define Settings and props (if any)
+- Shipping type
+- Estimated delivery time
+- Price
+- Pickup points
+- Custom empty state messages
 
 
-## Props
+## Installation
 
-**Explain your blocks and appSettings props**
+```bash
+vtex install piercecommercepartnerar.custom-shipping-simulator@0.x
+```
 
-`custom-shipping-simulator`:
 
-| Prop name  | Type    | Description                                  | Default value | Accepted values                                                                                                 |
-| ---------- | ------- | -------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------- |
-| `autofill` | `array` | Define which address fields should be filled | `undefined`   | Array with any of these values `["city", "country", "neighborhood", "number", "postalCode", "state", "street"]` |
 
-## Customization
+Then include it in the product template:
 
-In order to apply CSS customizations in this and other blocks, follow the instructions given in the recipe on [Using CSS Handles for store customization](https://vtex.io/docs/recipes/style/using-css-handles-for-store-customization).
+## Example
 
-| CSS Handles                       |
-| --------------------------------- |
-| `ADD YOUR HANDLES HERE!`  |
+```json 
+ "flex-layout.col#right-col": {
+    "props": {
+      "preventVerticalStretch": true,
+      "rowGap": 0
+    },
+    "children": [
+      "flex-layout.row#product-name",
+      "product-rating-summary",
+      "flex-layout.row#list-price-savings",
+      "flex-layout.row#selling-price",
+      "product-installments",
+      "product-separator",
+      "product-identifier.product",
+      "sku-selector",
+      "product-quantity",
+      "product-assembly-options",
+      "product-gifts",
+      "flex-layout.row#buy-button",
+      "custom-shipping-simulator",
+      "availability-subscriber",
+      "share#default"
+    ]
+  },
+
+```
+
+## Behavior
+
+- The simulator automatically detects the selected SKU.
+- When the product variant changes, the simulation runs again automatically.
+- If no SLAs are configured, an empty state message is displayed.
+
+## Styling
+
+The app supports customization through CSS Handles.
+
+
+
+## Notes
+
+- Shipping simulation depends on the SKU logistics configuration.
+- If the product has no available SLAs, no shipping methods will be displayed.
+```

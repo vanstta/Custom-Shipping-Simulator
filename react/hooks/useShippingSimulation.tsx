@@ -29,7 +29,10 @@ export function useShippingSimulation() {
 
       return data
     } catch (err) {
-      console.error("Error error", err)
+      console.error("shipping simulation error", {
+        body,
+        err,
+      })
 
       setError("Error simulating shipping")
 

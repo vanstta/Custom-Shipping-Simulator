@@ -52,6 +52,7 @@ const CustomShippingSimulator: React.FC = () => {
   const seller = selectedItem?.sellers?.[0]
 
   const slas = simulation?.logisticsInfo?.[0]?.slas || []
+  const hasSimulation = simulation !== null
 
   const handleClose = () => {
     setIsOpen(false)
@@ -64,17 +65,21 @@ const CustomShippingSimulator: React.FC = () => {
       return
     }
 
-    await runSimulation({
-      items: [
-        {
-          id: selectedItem.itemId,
-          quantity: 1,
-          seller: seller.sellerId,
-        },
-      ],
-      postalCode,
-      country: "ARG",
-    })
+    try {
+      await runSimulation({
+        items: [
+          {
+            id: selectedItem.itemId,
+            quantity: 1,
+            seller: seller.sellerId,
+          },
+        ],
+        postalCode,
+        country: "ARG",
+      })
+    } catch (err) {
+      console.error("shipping simulation error", err)
+    }
   }
 
   return (
@@ -115,7 +120,7 @@ const CustomShippingSimulator: React.FC = () => {
             </div>
 
             <div className={handles.shippingSimulatorContent}>
-              {!slas.length && (
+           {slas.length === 0 && (
                 <form
                   className={handles.shippingSimulatorForm}
                   onSubmit={(e) => {
@@ -175,10 +180,7 @@ const CustomShippingSimulator: React.FC = () => {
                       id: "store/shipping.help.postalCode",
                     })}
                   </a>
-                </form>
-              )}
-
-              {error && (
+                    {error && (
                 <p className={handles.shippingSimulatorError}>
                   {intl.formatMessage({
                     id: "store/shipping.error.default",
@@ -186,6 +188,16 @@ const CustomShippingSimulator: React.FC = () => {
                 </p>
               )}
 
+              {hasSimulation && !slas.length && !error && (
+                <p className={handles.shippingSimulatorError}>
+                  No hay opciones de entrega disponibles para esta ubicación.
+                </p>
+              )}
+
+                </form>
+              )}
+
+            
               {slas.length > 0 && (
                 <ShippingResults
                   slas={slas}
